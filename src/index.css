@@ -27,6 +27,10 @@ html {
   span {
     @apply text-primary;
   }
+
+  input {
+    @apply lg:min-w-[533px] p-5 text-xl lg:text-2xl bg-transparent border-b cursor-pointer
+}
 }
 
 ::-webkit-scrollbar {

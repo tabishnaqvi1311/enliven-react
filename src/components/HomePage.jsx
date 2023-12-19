@@ -1,9 +1,11 @@
 import { IoSpeedometerOutline } from "react-icons/io5";
 import homePageVector from "../assets/hero.svg";
+import TransitionEffect from "../components/TransitionEffect";
 import WhatWeDo from "./WhatWeDo";
 const HomePage = () => {
   return (
     <div className="w-full lg:h-[70vh] p-3">
+      <TransitionEffect />
       <div className="container mx-auto w-full h-full">
         <div className="flex flex-col lg:flex-row items-center justify-center w-full h-full gap-16 lg:gap-28 bg-primary rounded-tr-[4rem] rounded-tl-[4rem] lg:rounded-[8rem] px-10">
           <div className="flex flex-col items-center lg:items-start gap-5 lg:gap-10">

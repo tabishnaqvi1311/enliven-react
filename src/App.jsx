@@ -1,22 +1,20 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css'
-import HomePage from './components/HomePage';
-import Navbar from './components/Navbar';
-import Signup from './components/Signup';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import HomePage from "./components/HomePage";
+import Navbar from "./components/Navbar";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 function App() {
-
   return (
-    <div className='App'>
+    <div className="App">
       <Navbar />
-      <HomePage />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<HomePage/>}/>
-          <Route path='/signup' element={<Signup />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
