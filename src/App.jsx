@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Support from "./components/Support";
 import FreeLearningModules from "./components/FreeLearningModules";
 import Features from "./components/Features";
+import Footer from "./components/Footer";
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,7 @@ function App() {
         />
         <Route path="/features" element={<Features />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
