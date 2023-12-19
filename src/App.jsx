@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Support from "./components/Support";
+import FreeLearningModules from "./components/FreeLearningModules";
+import Features from "./components/Features";
 function App() {
   return (
     <div className="App">
@@ -14,6 +16,11 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/support" element={<Support />} />
+        <Route
+          path="/free-learning-modules"
+          element={<FreeLearningModules />}
+        />
+        <Route path="/features" element={<Features />} />
       </Routes>
     </div>
   );

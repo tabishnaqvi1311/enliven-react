@@ -7,10 +7,10 @@ import WhatWeDo from "./WhatWeDo";
 import { Link } from "react-router-dom";
 const HomePage = () => {
   return (
-    <div className="w-full lg:h-[70vh] p-3">
+    <div className="w-full  p-3">
       <TransitionEffect />
       <div className="container mx-auto w-full h-full">
-        <div className="flex flex-col lg:flex-row items-center justify-center w-full h-full gap-16 lg:gap-28 bg-primary rounded-tr-[4rem] rounded-tl-[4rem] lg:rounded-[8rem] px-20">
+        <div className="flex flex-col lg:flex-row items-center justify-center w-full h-full gap-16 lg:gap-28 bg-primary rounded-tr-[4rem] rounded-tl-[4rem] lg:rounded-[8rem] p-20">
           <div className="flex flex-col items-center lg:items-start gap-5 lg:gap-14">
             <h2 className="text-background text-center lg:text-start  lg:leading-[4rem] mt-5 lg:mt-0">
               Mindmate Junior: <span className="text-secondary">Empowering Minds</span>

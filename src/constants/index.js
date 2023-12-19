@@ -5,3 +5,7 @@ export const menuList = [
   { label: "Community", path: "/community" },
   { label: "Support", path: "/support" },
 ];
+
+export const freeLearningModules = [
+  {label: ""}
+]
