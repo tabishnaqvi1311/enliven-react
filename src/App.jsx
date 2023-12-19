@@ -9,13 +9,17 @@ import FreeLearningModules from "./components/FreeLearningModules";
 import Features from "./components/Features";
 import Footer from "./components/Footer";
 function App() {
+
+
+  const user = localStorage.getItem("token");
+
   return (
     <div className="App">
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={user ? <HomePage/> : <Signup/>} />
+        <Route path="/login" element={user ? <HomePage/> : <Login/>} />
         <Route path="/support" element={<Support />} />
         <Route
           path="/free-learning-modules"

@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
 import { menuList } from "../constants/index";
 const Navbar = () => {
+
+  const user = localStorage.getItem("token");
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("uid");
+    window.location.reload();
+
+  }
+
   return (
     <div className="w-full h-20 z-[999] bg-background sticky top-0">
       <div className="container mx-auto w-full h-full">
@@ -29,11 +39,14 @@ const Navbar = () => {
           </div>
 
           {/* login / signup button */}
-          <Link to="/signup">
+          {!user ? <Link to="/signup">
             <button className="p-3 rounded-tr-xl rounded-bl-xl bg-primary text-background  border border-primary font-semibold hover:bg-background hover:text-secondary duration-150">
               Login / Signup
             </button>
-          </Link>
+          </Link> : 
+          <button className="p-3 rounded-tr-xl rounded-bl-xl bg-primary text-background  border border-primary font-semibold hover:bg-background hover:text-secondary duration-150" onClick={
+            logout}>Logout</button>
+          }
         </div>
       </div>
     </div>

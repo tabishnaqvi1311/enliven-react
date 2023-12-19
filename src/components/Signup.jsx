@@ -1,21 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TransitionEffect from "./TransitionEffect";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, redirect, useLocation } from "react-router-dom";
 const Signup = () => {
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!username || !email || !password) {
-      setError("All fields are necessary.");
+    if(password !== confirmPassword){
+      setError("Passwords do no match");
       return;
     }
+
+    const response = await fetch("http://localhost:8181/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email, password
+      })
+    });
+
+    if(!response.ok){
+      console.log(response.json());
+      return;
+    }
+
+    const json = await response.json();
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+
+    localStorage.setItem("uid", json.userId);
+    localStorage.setItem("token", json.token);
+
+    console.log(json);
+
   };
+
 
   return (
     <div className="w-full lg:h-[90vh] p-5 lg:p-0">
@@ -38,20 +67,28 @@ const Signup = () => {
             <form
               className="flex flex-col items-start gap-5"
               onSubmit={handleSubmit}>
-              <input
+              {/* <input
                 type="text"
                 placeholder="Username"
                 onChange={(e) => setUsername(e.target.value)}
-              />
+              /> */}
               <input
                 type="email"
                 placeholder="Email Id"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
                 placeholder="Password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Repeat Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <button className="p-3 rounded-tr-xl rounded-bl-xl bg-primary text-background  border border-primary font-semibold hover:bg-background hover:text-secondary text-xl duration-150">
               Register
