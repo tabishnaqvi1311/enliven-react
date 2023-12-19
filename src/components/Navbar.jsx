@@ -21,7 +21,9 @@ const Navbar = () => {
               <ul
                 key={index}
                 className="text-lg hover:text-primary duration-150 cursor-pointer">
-                <li>{list.label}</li>
+                <Link to={list.path}>
+                  <li>{list.label}</li>
+                </Link>
               </ul>
             ))}
           </div>
