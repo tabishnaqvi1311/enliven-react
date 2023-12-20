@@ -15,7 +15,7 @@ const Dashboard = () => {
   const user = localStorage.getItem("uid");
 
   const getUserEmail = async() => {
-    const response = await fetch(`http://apathetic-grade-production.up.railway.app/api/user/${user}`);
+    const response = await fetch(`https://apathetic-grade-production.up.railway.app/api/user/${user}`);
     const json = await response.json();
     setUsername(json.email.split("@")[0]);
 
