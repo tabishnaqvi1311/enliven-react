@@ -3,17 +3,19 @@ import { IoIosPeople } from "react-icons/io";
 import { RiSoundModuleFill } from "react-icons/ri";
 import homePageVector from "../assets/hero.svg";
 import TransitionEffect from "../components/TransitionEffect";
+import { GiSittingDog } from "react-icons/gi";
 import WhatWeDo from "./WhatWeDo";
 import { Link } from "react-router-dom";
 const HomePage = () => {
   return (
-    <div className="w-full  p-3">
+    <div className="w-full relative  p-3">
       <TransitionEffect />
       <div className="container mx-auto w-full h-full">
         <div className="flex flex-col lg:flex-row items-center justify-center w-full h-full gap-16 lg:gap-28 bg-primary rounded-tr-[4rem] rounded-tl-[4rem] lg:rounded-[8rem] p-20">
           <div className="flex flex-col items-center lg:items-start gap-5 lg:gap-14">
             <h2 className="text-background text-center lg:text-start  lg:leading-[4rem] mt-5 lg:mt-0">
-              Mindmate Junior: <span className="text-secondary">Empowering Minds</span>
+              Mindmate Junior:{" "}
+              <span className="text-secondary">Empowering Minds</span>
             </h2>
 
             <div className="flex flex-col lg:flex-row items-center gap-10">
@@ -48,6 +50,10 @@ const HomePage = () => {
               height={800}
             />
           </div>
+        </div>
+
+        <div className="fixed right-20 bottom-28 rounded-full bg-primary p-3">
+          <GiSittingDog size={50} />
         </div>
       </div>
 
