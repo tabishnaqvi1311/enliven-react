@@ -12,7 +12,6 @@ import Dashboard from "./components/Dashboard";
 import Consultant from "./components/Consultant";
 function App() {
   const user = localStorage.getItem("token");
-
   return (
     <div className="App">
       <Navbar />

@@ -1,8 +1,6 @@
 export const menuList = [
-  { label: "Features", path: "/features" },
   { label: "Consultant", path: "/consultant" },
   { label: "Free Learning Modules", path: "/free-learning-modules" },
-  { label: "Community", path: "/community" },
   { label: "Support", path: "/support" },
 ];
 
@@ -68,5 +66,17 @@ export const psychologist = [
     designation: "Psychologist",
     experience: "14 years experience overall",
     photo: "/psychologist/neha.jpg",
+  },
+  {
+    label: "Gagandeep Kaur",
+    designation: "Child & Clinical Psychologist",
+    experience: "18 years experience overall",
+    photo: "/psychologist/gagandeep.jpeg",
+  },
+  {
+    label: "Charu Aganpal",
+    designation: "Psychologist at HOPE-THE PSYCHOLOGY CLINIC",
+    experience: "9 years experience overall",
+    photo: "/psychologist/charu.jpeg",
   },
 ];
