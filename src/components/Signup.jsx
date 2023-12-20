@@ -18,7 +18,7 @@ const Signup = () => {
       return;
     }
 
-    const response = await fetch("http://apathetic-grade-production.up.railway.app/api/auth/signup", {
+    const response = await fetch("https://apathetic-grade-production.up.railway.app/api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
