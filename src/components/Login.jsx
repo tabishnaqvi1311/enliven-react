@@ -12,7 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const onLogin = async () => { 
-    const response = await fetch("http://localhost:8181/api/auth/login", {
+    const response = await fetch("http://apathetic-grade-production.up.railway.app/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"     
