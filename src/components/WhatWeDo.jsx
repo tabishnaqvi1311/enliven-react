@@ -14,10 +14,10 @@ const WhatWeDo = () => {
           </div>
 
           <div className="flex flex-col items-center lg:items-start gap-3 lg:w-[35rem]">
-            <h3>
+            <p className="text-2xl font-medium">
               We aim to inspire confidence, nuture positive habits and lay the
               foundation for a lifetime of mental wellness
-            </h3>
+            </p>
 
             <p>
               
