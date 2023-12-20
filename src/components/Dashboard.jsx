@@ -1,8 +1,9 @@
 import { games } from "../constants";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import TabButton from "./TabButton";
 import { Circle } from "rc-progress";
 const Dashboard = () => {
+  const [username, setUsername] = useState("");
   const [tab, setTab] = useState("Child 1");
   const [startTransition] = useTransition();
   const handleTabChange = (id) => {
@@ -10,6 +11,20 @@ const Dashboard = () => {
       setTab(id);
     });
   };
+
+  const user = localStorage.getItem("uid");
+
+  const getUserEmail = async() => {
+    const response = await fetch(`http://localhost:8181/api/user/${user}`);
+    const json = await response.json();
+    setUsername(json.email.split("@")[0]);
+
+  }
+
+
+  useEffect(() => {
+    getUserEmail();
+  }, [])
 
   const Children_Tab_Data = [
     {
@@ -32,7 +47,7 @@ const Dashboard = () => {
           </div>
 
           <div
-            className="flex flex-col items-center gap-3"
+            className="flex flex-col items-center gap-3 border-red-500"
             style={{ margin: 20, width: 230, height: 230 }}>
             <Circle
               percent={35}
@@ -126,7 +141,7 @@ const Dashboard = () => {
       <div className="container mx-auto">
         <div className="flex flex-col gap-3 items-start justify-start mt-3">
           <h3 className="text-primary">Dashboard</h3>
-          <p className="text-lg">Welcome, Sairam</p>
+          <p className="text-lg">Welcome, {username}</p>
         </div>
 
         <div className="flex items-center justify-center mt-10 ">
