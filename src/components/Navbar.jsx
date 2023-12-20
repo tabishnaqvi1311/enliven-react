@@ -43,9 +43,12 @@ const Navbar = () => {
             <button className="p-3 rounded-tr-xl rounded-bl-xl bg-primary text-background  border border-primary font-semibold hover:bg-background hover:text-secondary duration-150">
               Login / Signup
             </button>
-          </Link> : 
-          <button className="p-3 rounded-tr-xl rounded-bl-xl bg-primary text-background  border border-primary font-semibold hover:bg-background hover:text-secondary duration-150" onClick={
-            logout}>Logout</button>
+          </Link> :
+            <>
+              <button className="p-3 rounded-tr-xl rounded-bl-xl bg-primary text-background  border border-primary font-semibold hover:bg-background hover:text-secondary duration-150" onClick={
+                logout}>Logout</button>
+              <Link to={"/dashboard"}>Dashboard</Link>
+            </>
           }
         </div>
       </div>
