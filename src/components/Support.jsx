@@ -6,7 +6,7 @@ const Support = () => {
     return <p>Thanks for joining!</p>;
   }
   return (
-    <div className="w-full lg:h-[90vh] p-3">
+    <div className="w-full lg:h-full p-3">
       <TransitionEffect />
       <div className="container mx-auto w-full h-full">
         <div className="flex flex-col items-center justify-center gap-10 w-full h-full">

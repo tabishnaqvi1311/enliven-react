@@ -1,17 +1,18 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import HomePage from "./components/HomePage";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import HomePage from "./components/HomePage";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Support from "./components/Support";
 import FreeLearningModules from "./components/FreeLearningModules";
-import Features from "./components/Features";
-// import Footer from "./components/Footer";
-import Dashboard from "./components/Dashboard";
 import Consultant from "./components/Consultant";
+import Blog from "./components/Blog";
+import Dashboard from "./components/Dashboard";
+
 function App() {
   const user = localStorage.getItem("token");
+
   return (
     <div className="App">
       <Navbar />
@@ -25,10 +26,9 @@ function App() {
           path="/free-learning-modules"
           element={<FreeLearningModules />}
         />
-        <Route path="/features" element={<Features />} />
         <Route path="/dashboard" element={user ? <Dashboard /> : <Login />} />
+        <Route path="/blog/:slug" element={<Blog />} /> {/* Dynamic route for blogs */}
       </Routes>
-      {/* <Footer /> */}
     </div>
   );
 }
