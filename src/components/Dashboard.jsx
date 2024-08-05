@@ -1,11 +1,21 @@
 import { games } from "../constants";
 import { useEffect, useState, useTransition } from "react";
 import TabButton from "./TabButton";
-import { Circle } from "rc-progress";
+import { AnimatePresence, motion } from "framer-motion";
+import ChildCard from "./ChildCard";
+// import { Circle } from "rc-progress";
 const Dashboard = () => {
+
   const [username, setUsername] = useState("");
   const [tab, setTab] = useState("Child 1");
   const [startTransition] = useTransition();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [name, setName] = useState("");
+  const [age, setAge] = useState();
+
+  const [children, setChildren] = useState([]);
+
   const handleTabChange = (id) => {
     startTransition(() => {
       setTab(id);
@@ -14,127 +24,38 @@ const Dashboard = () => {
 
   const user = localStorage.getItem("uid");
 
-  const getUserEmail = async() => {
+  const getUserEmail = async () => {
     const response = await fetch(`http://localhost:8181/api/user/${user}`);
     const json = await response.json();
     setUsername(json.email.split("@")[0]);
 
+    const getChildren = await fetch(`http://localhost:8181/api/user/${user}/children`);
+    const childrenjson = await getChildren.json();
+    setChildren(childrenjson)
+
   }
 
+  const createChild = async () => {
+    const response = await fetch(`http://localhost:8181/api/user/${user}/child`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, age })
+    });
+    const json = await response.json();
+    console.log(json);
+  }
+
+  // const children = [];
+
+
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.5 },
+    visible: { opacity: 1, scale: 1 },
+  };
 
   useEffect(() => {
     getUserEmail();
   }, [])
-
-  const Children_Tab_Data = [
-    {
-      title: "Child 1",
-      id: "Child 1",
-      content: (
-        <div className="flex items-center justify-center mt-10">
-          <div
-            className="flex flex-col items-center gap-3"
-            style={{ margin: 20, width: 230, height: 230 }}>
-            <Circle
-              percent={50}
-              strokeColor="#CAFF33"
-              strokeWidth={4}
-              trailColor="gray"
-              trailWidth={4}
-              strokeLinecap="sqaure"
-            />
-            <p className="text-xl font-bold">SpeakUp</p>
-          </div>
-
-          <div
-            className="flex flex-col items-center gap-3 border-red-500"
-            style={{ margin: 20, width: 230, height: 230 }}>
-            <Circle
-              percent={35}
-              strokeColor="#CAFF33"
-              strokeWidth={4}
-              trailColor="gray"
-              trailWidth={4}
-              strokeLinecap="sqaure"
-            />
-            <p className="text-xl font-bold">The Zoo</p>
-          </div>
-        </div>
-      ),
-    },
-
-    {
-      title: "Child 2",
-      id: "Child 2",
-      content: (
-        <div className="flex items-center justify-center mt-5">
-          <div
-            className="flex flex-col items-center gap-3"
-            style={{ margin: 20, width: 230, height: 230 }}>
-            <Circle
-              percent={10}
-              strokeColor="#CAFF33"
-              strokeWidth={4}
-              trailColor="gray"
-              trailWidth={4}
-              strokeLinecap="sqaure"
-            />
-            <p className="text-xl font-bold">SpeakUp</p>
-          </div>
-
-          <div
-            className="flex flex-col items-center gap-3"
-            style={{ margin: 20, width: 230, height: 230 }}>
-            <Circle
-              percent={25}
-              strokeColor="#CAFF33"
-              strokeWidth={4}
-              trailColor="gray"
-              trailWidth={4}
-              strokeLinecap="sqaure"
-            />
-            <p className="text-xl font-bold">The Zoo</p>
-          </div>
-        </div>
-      ),
-    },
-
-    {
-      title: "Child 3",
-      id: "Child 3",
-      content: (
-        <div className="flex items-center justify-center mt-5">
-          <div
-            className="flex flex-col items-center gap-3"
-            style={{ margin: 20, width: 230, height: 230 }}>
-            <Circle
-              percent={15}
-              strokeColor="#CAFF33"
-              strokeWidth={4}
-              trailColor="gray"
-              trailWidth={4}
-              strokeLinecap="sqaure"
-            />
-            <p className="text-xl font-bold">SpeakUp</p>
-          </div>
-
-          <div
-            className="flex flex-col items-center gap-3"
-            style={{ margin: 20, width: 230, height: 230 }}>
-            <Circle
-              percent={95}
-              strokeColor="#CAFF33"
-              strokeWidth={4}
-              trailColor="gray"
-              trailWidth={4}
-              strokeLinecap="sqaure"
-            />
-            <p className="text-xl font-bold">The Zoo</p>
-          </div>
-        </div>
-      ),
-    },
-  ];
 
   return (
     <div className="w-full p-3">
@@ -161,24 +82,64 @@ const Dashboard = () => {
 
         <hr className="mt-10" />
 
-        <div className="flex items-center justify-center gap-5 mt-10">
-          <TabButton
-            selectTab={() => handleTabChange("Child 1")}
-            active={tab === "Child 1"}>
-            Child 1
-          </TabButton>
-          <TabButton
-            selectTab={() => handleTabChange("Child 2")}
-            active={tab === "Child 2"}>
-            Child 2
-          </TabButton>
-          <TabButton
-            selectTab={() => handleTabChange("Child 3")}
-            active={tab === "Child 3"}>
-            Child 3
-          </TabButton>
+        <div className="flex flex-col justify-center items-center mt-10">
+
+            <div className="flex ">
+            {children.length !== 0 && children.map((child) => (
+                <ChildCard name={child.name} confidence={child.confidence} knowledge={child.knowledge} age={child.age}/>
+            ))}
+            </div>
+      
+
+          <button className="text-lg font-bold text-gray-600 border p-2 border-dashed rounded-xl border-gray-400 hover:bg-slate-100 transition-all duration-150 " onClick={() => setIsOpen(prev => !prev)}>+ ADD CHILD
+          </button>
+
+          {isOpen && <div className="fixed top-0 left-0 w-full h-full z-40 bg-black bg-opacity-50" />}
+        {/*add child modal, POSTS to 'api/user/(userId)/child*/}
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-40 shadow-md"
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={modalVariants}>
+                <div className="bg-white p-8 rounded">
+                  <div className="text-2xl text-center py-2">Enter Name</div>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter name of child"
+                    className="border border-gray-400 rounded p-2 mb-2 text-lg"
+                  />
+                  <div className="text-2xl text-center py-2">Enter Age</div>
+                  <input
+                    type="number"
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                    placeholder="Enter age of child"
+                    className="border border-gray-400 rounded p-2 mb-2 text-lg"
+                  />
+                  <div className="flex flex-row gap-5 justify-center py-2">
+                    <button
+                      className="bg-[#8bc53f] text-white rounded px-4 py-2"
+                      onClick={createChild}
+                    >
+                      Add
+                    </button>
+                    <button
+                      className="bg-red-400 text-white rounded px-4 py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
         </div>
-        <div>{Children_Tab_Data.find((t) => t.id === tab).content}</div>
       </div>
     </div>
   );
