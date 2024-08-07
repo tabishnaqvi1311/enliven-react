@@ -1,5 +1,6 @@
 import {AnimatePresence, motion} from "framer-motion";
 import {useState} from 'react';
+import Pie from "./Pie";
 
 const  ChildCard = ({name, confidence, knowledge, age}) => {
 
@@ -13,7 +14,6 @@ const  ChildCard = ({name, confidence, knowledge, age}) => {
     return (
         <>
         {isOpen && <div className="fixed top-0 left-0 w-full h-full z-40 bg-black bg-opacity-50" />}
-        {/*add child modal, POSTS to 'api/user/(userId)/child*/}
           <AnimatePresence>
             {isOpen && (
               <motion.div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-40 shadow-md"
@@ -21,11 +21,12 @@ const  ChildCard = ({name, confidence, knowledge, age}) => {
                 animate="visible"
                 exit="hidden"
                 variants={modalVariants}>
-                <div className="bg-white flex flex-col p-10">
-                    {confidence}
-                    {knowledge}
+                <div className="bg-white flex flex-col p-10 h-3/4 w-3/4 rounded-xl">
+                    {/* TODO: make this look good on mobile */}
+                    <span className="text-center capitalize font-bold text-xl text-black">{name}</span>
+                    <Pie confidence={confidence*100} knowledge={knowledge*100}/>
                    <button
-                      className="bg-red-400 text-white rounded px-4 py-2"
+                      className=" text-white rounded px-4 py-2 bg-[#8bc53f]"
                       onClick={() => setIsOpen(false)}
                     >
                       Close

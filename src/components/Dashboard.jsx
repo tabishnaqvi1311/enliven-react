@@ -84,7 +84,7 @@ const Dashboard = () => {
 
         <div className="flex flex-col justify-center items-center mt-10">
 
-            <div className="flex ">
+            <div className="flex md:flex-row flex-col">
             {children.length !== 0 && children.map((child) => (
                 <ChildCard name={child.name} confidence={child.confidence} knowledge={child.knowledge} age={child.age}/>
             ))}
